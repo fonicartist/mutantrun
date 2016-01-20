@@ -215,6 +215,18 @@ void Game::velocityUpdate() {
 
 	if (points == 0)
 		velocity = 0;
+	else if (points > 900) {
+		int add = (points - 900) / 60;
+		velocity = -7.5 - .2 * add;
+	}
+	else if (points > 100) {
+		int add = points / 60;
+		velocity = -.5 * add;
+	}
+
+	/*
+	if (points == 0)
+		velocity = 0;
 	else if (points > 100 && velocity == 0)
 		velocity -= .5;
 	else if (points > 150 && velocity == -.5)
@@ -271,7 +283,7 @@ void Game::velocityUpdate() {
 		velocity -= .1;
 	else if (points > 1450 && velocity == -9.9)
 		velocity -= .1;
-
+	*/
 
 }
 
@@ -303,6 +315,7 @@ void Game::update() {
 		points = jumpCount * 10 + atkCount * 25;
 		number.setString(std::to_string(points));
 		velocityUpdate();
+		cout << velocity << endl;
 
 	}
 	else if (gameState_ == gameOver) {
